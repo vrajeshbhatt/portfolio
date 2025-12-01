@@ -786,9 +786,9 @@ const Contact = ({ data }) => {
 
   // --- EMAILJS CONFIGURATION ---
   // Replace these strings with your actual keys from the EmailJS dashboard
-  const SERVICE_ID = "YOUR_SERVICE_ID";
-  const TEMPLATE_ID = "YOUR_TEMPLATE_ID";
-  const PUBLIC_KEY = "YOUR_PUBLIC_KEY";
+  const SERVICE_ID = "service_q65qxgo";
+  const TEMPLATE_ID = "template_rk2ndsl";
+  const PUBLIC_KEY = "4g8au6eVMOKc9YXSs";
 
   const sendEmail = (e) => {
     e.preventDefault();
