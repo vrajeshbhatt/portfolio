@@ -7,7 +7,7 @@ import {
 
 export const portfolioData = {
   personalInfo: {
-    name: "Vrajeshkumar Bhatt",
+    name: "Vrajesh Bhatt",
     role: "Machine Learning Engineer & Data Analyst",
     tagline: "Transforming raw data into actionable intelligence through AI and scalable software solutions.",
     location: "Toronto, ON, Canada",

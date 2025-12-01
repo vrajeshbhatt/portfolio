@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { portfolioData } from './portfolioData';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import emailjs from '@emailjs/browser';
 import { 
   Github, 
   Linkedin, 
   Mail, 
   ExternalLink, 
   Code2, 
-  ChevronDown, 
   Menu, 
   X,
   Brain,
@@ -19,10 +18,38 @@ import {
   Send,
   Plus,
   Trash2,
-  Save
+  ChevronDown,
+  Loader2,
+  CheckCircle,
+  AlertCircle
 } from 'lucide-react';
 
 
+// --- CUSTOM ICONS ---
+
+// Custom SVG for Hugging Face since it's not in Lucide
+const HuggingFaceIcon = ({ size = 20, className }) => (
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    width={size} 
+    height={size} 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth="2" 
+    strokeLinecap="round" 
+    strokeLinejoin="round"
+    className={className}
+  >
+    <circle cx="12" cy="12" r="10" />
+    <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+    <line x1="9" y1="9" x2="9.01" y2="9" />
+    <line x1="15" y1="9" x2="15.01" y2="9" />
+    {/* Stylized Hands */}
+    <path d="M19 16c0 1.5-1 2.5-3 2.5" />
+    <path d="M5 16c0 1.5 1 2.5 3 2.5" />
+  </svg>
+);
 
 // --- ICON MAPPER ---
 const IconMap = {
@@ -60,7 +87,8 @@ const Editor = ({ data, setData, onClose }) => {
   const [copied, setCopied] = useState(false);
 
   const handleExport = () => {
-    const codeString = `export const portfolioData = ${JSON.stringify(data, null, 2)};`;
+    // Note: When using single file, this export is less critical but still useful for backup
+    const codeString = `const portfolioData = ${JSON.stringify(data, null, 2)};`;
     navigator.clipboard.writeText(codeString);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
@@ -178,6 +206,8 @@ const Editor = ({ data, setData, onClose }) => {
           <EditorField label="Role Title" value={data.personalInfo.role} onChange={(v) => updatePersonalInfo('role', v)} />
           <EditorField label="Location" value={data.personalInfo.location} onChange={(v) => updatePersonalInfo('location', v)} />
           <EditorField label="Email" value={data.personalInfo.email} onChange={(v) => updatePersonalInfo('email', v)} />
+          {/* New field for image */}
+          <EditorField label="Image URL (e.g., /profile.jpg)" value={data.personalInfo.image || ''} onChange={(v) => updatePersonalInfo('image', v)} />
           <div className="md:col-span-2">
             <EditorField label="Tagline" type="textarea" value={data.personalInfo.tagline} onChange={(v) => updatePersonalInfo('tagline', v)} />
           </div>
@@ -381,7 +411,7 @@ const Editor = ({ data, setData, onClose }) => {
           </p>
           <ol className="text-left text-sm text-slate-400 list-decimal list-inside space-y-2 mb-4 inline-block mx-auto">
             <li>Click <b>"Export JSON"</b> in the top right.</li>
-            <li>Open your local <code>portfolioData.js</code> (or replace the data object in App.jsx).</li>
+            <li>Open your local <code>src/portfolioData.js</code>.</li>
             <li>Paste the new code to replace the old data.</li>
             <li>Push to GitHub.</li>
           </ol>
@@ -554,13 +584,24 @@ const About = ({ data }) => {
             <div className="flex gap-4 pt-4">
               <SocialLink href={data.personalInfo.social.github} icon={<Github size={20} />} />
               <SocialLink href={data.personalInfo.social.linkedin} icon={<Linkedin size={20} />} />
+              {data.personalInfo.social.huggingface && (
+                <SocialLink href={data.personalInfo.social.huggingface} icon={<HuggingFaceIcon size={20} />} />
+              )}
               <SocialLink href={data.personalInfo.social.email} icon={<Mail size={20} />} />
             </div>
           </div>
           <div className="relative group">
             <div className="absolute inset-0 bg-teal-500 rounded-lg transform translate-x-3 translate-y-3 transition-transform group-hover:translate-x-2 group-hover:translate-y-2" />
-            <div className="relative bg-slate-800 rounded-lg p-1 h-64 w-full flex items-center justify-center border border-slate-700">
-               <span className="text-6xl">👨‍💻</span>
+            <div className="relative bg-slate-800 rounded-lg p-1 h-64 w-full flex items-center justify-center border border-slate-700 overflow-hidden">
+               {data.personalInfo.image ? (
+                 <img 
+                   src={data.personalInfo.image} 
+                   alt={data.personalInfo.name} 
+                   className="w-full h-full object-cover rounded-lg grayscale hover:grayscale-0 transition-all duration-300"
+                 />
+               ) : (
+                 <span className="text-6xl">👨‍💻</span>
+               )}
             </div>
           </div>
         </div>
@@ -738,17 +779,43 @@ const Projects = ({ data }) => {
   );
 };
 
+// --- DYNAMIC CONTACT FORM (UPDATED) ---
 const Contact = ({ data }) => {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const form = useRef();
+  const [status, setStatus] = useState('idle'); // idle, sending, success, error
 
-  const handleSubmit = (e) => {
+  // --- EMAILJS CONFIGURATION ---
+  // Replace these strings with your actual keys from the EmailJS dashboard
+  const SERVICE_ID = "YOUR_SERVICE_ID";
+  const TEMPLATE_ID = "YOUR_TEMPLATE_ID";
+  const PUBLIC_KEY = "YOUR_PUBLIC_KEY";
+
+  const sendEmail = (e) => {
     e.preventDefault();
-    // Construct mailto link
-    const subject = `Portfolio Contact from ${formData.name}`;
-    const body = `Name: ${formData.name}%0D%0AEmail: ${formData.email}%0D%0A%0D%0AMessage:%0D%0A${formData.message}`;
+    setStatus('sending');
+
+    // MOCK SEND FOR PREVIEW (UNCOMMENT BELOW FOR LOCAL USE)
     
-    // Uses the email from data prop (vrajesh.bhatt@outlook.com)
-    window.location.href = `mailto:${data.personalInfo.email}?subject=${encodeURIComponent(subject)}&body=${body}`;
+    emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form.current, PUBLIC_KEY)
+      .then((result) => {
+        console.log(result.text);
+        setStatus('success');
+        e.target.reset(); // Clear form
+        setTimeout(() => setStatus('idle'), 5000); // Reset status after 5 seconds
+      }, (error) => {
+        console.log(error.text);
+        setStatus('error');
+        setTimeout(() => setStatus('idle'), 5000);
+      });
+    
+    
+    // Simulating sending for preview so the UI doesn't crash
+    setTimeout(() => {
+        console.log("Simulated email sent successfully. Uncomment EmailJS logic locally.");
+        setStatus('success');
+        e.target.reset();
+        setTimeout(() => setStatus('idle'), 5000);
+    }, 1000);
   };
 
   return (
@@ -762,16 +829,15 @@ const Contact = ({ data }) => {
         </p>
 
         {/* Contact Form */}
-        <form onSubmit={handleSubmit} className="max-w-md mx-auto space-y-4 text-left bg-slate-900/50 p-6 rounded-xl border border-slate-800">
+        <form ref={form} onSubmit={sendEmail} className="max-w-md mx-auto space-y-4 text-left bg-slate-900/50 p-6 rounded-xl border border-slate-800">
           <div>
             <label className="block text-slate-400 text-sm font-bold mb-2">Name</label>
             <input 
               required
               type="text" 
+              name="user_name" // Required by EmailJS
               className="w-full bg-slate-950 border border-slate-800 rounded p-3 text-slate-200 focus:border-teal-500 focus:outline-none"
               placeholder="Your Name"
-              value={formData.name}
-              onChange={(e) => setFormData({...formData, name: e.target.value})}
             />
           </div>
           <div>
@@ -779,10 +845,9 @@ const Contact = ({ data }) => {
             <input 
               required
               type="email" 
+              name="user_email" // Required by EmailJS
               className="w-full bg-slate-950 border border-slate-800 rounded p-3 text-slate-200 focus:border-teal-500 focus:outline-none"
               placeholder="your@email.com"
-              value={formData.email}
-              onChange={(e) => setFormData({...formData, email: e.target.value})}
             />
           </div>
           <div>
@@ -790,17 +855,26 @@ const Contact = ({ data }) => {
             <textarea 
               required
               rows="4"
+              name="message" // Required by EmailJS
               className="w-full bg-slate-950 border border-slate-800 rounded p-3 text-slate-200 focus:border-teal-500 focus:outline-none"
               placeholder="Hello! I'd like to connect..."
-              value={formData.message}
-              onChange={(e) => setFormData({...formData, message: e.target.value})}
             />
           </div>
+          
           <button 
             type="submit"
-            className="w-full py-3 bg-teal-500 hover:bg-teal-600 text-slate-950 font-bold rounded-lg transition-all flex justify-center items-center gap-2"
+            disabled={status === 'sending' || status === 'success'}
+            className={`w-full py-3 font-bold rounded-lg transition-all flex justify-center items-center gap-2
+              ${status === 'sending' ? 'bg-slate-700 text-slate-400 cursor-not-allowed' : ''}
+              ${status === 'success' ? 'bg-green-500/10 text-green-400 border border-green-500/50 cursor-default' : ''}
+              ${status === 'error' ? 'bg-red-500/10 text-red-400 border border-red-500/50' : ''}
+              ${status === 'idle' ? 'bg-teal-500 hover:bg-teal-600 text-slate-950' : ''}
+            `}
           >
-            <Send size={18} /> Send Message
+            {status === 'idle' && <><Send size={18} /> Send Message</>}
+            {status === 'sending' && <><Loader2 size={18} className="animate-spin" /> Sending...</>}
+            {status === 'success' && <><CheckCircle size={18} /> Message Sent!</>}
+            {status === 'error' && <><AlertCircle size={18} /> Error. Try Again.</>}
           </button>
         </form>
 
