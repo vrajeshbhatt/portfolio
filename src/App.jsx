@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { portfolioData } from './portfolioData';
 import { motion, AnimatePresence } from 'framer-motion';
 import emailjs from '@emailjs/browser';
 import { 
