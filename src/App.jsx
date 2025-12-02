@@ -923,6 +923,11 @@ export default function App() {
 
       {/* Global Background Elements */}
       <div className="fixed inset-0 z-0 pointer-events-none">
+        <img
+          src="/background.png"
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover opacity-10"
+        />
         <div className="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-neon-purple/5 rounded-full blur-[100px]" />
         <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-neon-cyan/5 rounded-full blur-[100px]" />
       </div>
