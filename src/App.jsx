@@ -535,9 +535,15 @@ const Hero = ({ data }) => {
       <motion.div
         animate={{ y: [0, 10, 0] }}
         transition={{ repeat: Infinity, duration: 2 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 text-slate-500 z-20"
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20"
       >
-        <ChevronDown size={24} />
+        <a
+          href="#about"
+          className="text-slate-500 hover:text-neon-cyan transition-colors cursor-pointer block p-2"
+          aria-label="Scroll to About section"
+        >
+          <ChevronDown size={24} />
+        </a>
       </motion.div>
     </section>
   );
