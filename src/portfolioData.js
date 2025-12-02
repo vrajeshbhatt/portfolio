@@ -13,6 +13,7 @@ export const portfolioData = {
     location: "Toronto, ON, Canada",
     email: "vrajesh.bhatt@outlook.com",
     availability: "Open to Relocate",
+    image:"profile.jpg",
     social: {
       linkedin: "https://linkedin.com/in/vrajeshbhatt/",
       github: "https://github.com/vrajeshbhatt",
