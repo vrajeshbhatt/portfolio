@@ -803,6 +803,10 @@ const Contact = ({ data }) => {
   const TEMPLATE_ID = "template_rk2ndsl";
   const PUBLIC_KEY = "4g8au6eVMOKc9YXSs";
 
+  useEffect(() => {
+    emailjs.init(PUBLIC_KEY);
+  }, []);
+
   const sendEmail = (e) => {
     e.preventDefault();
     setStatus('sending');
