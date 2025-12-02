@@ -809,18 +809,17 @@ const Contact = ({ data }) => {
 
     // Debug: Log the data being sent
     const formData = new FormData(form.current);
-    console.log("Sending EmailJS Data:", {
-      from_name: formData.get('from_name'),
-      from_email: formData.get('from_email'),
-      message: formData.get('message')
-    });
+    const templateParams = Object.fromEntries(formData);
 
-    emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form.current, PUBLIC_KEY)
+    console.log("Sending EmailJS Data:", templateParams);
+
+    emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY)
       .then((result) => {
         setStatus('success');
         e.target.reset();
         setTimeout(() => setStatus('idle'), 5000);
       }, (error) => {
+        console.error("EmailJS Error:", error);
         setStatus('error');
         setTimeout(() => setStatus('idle'), 5000);
       });
