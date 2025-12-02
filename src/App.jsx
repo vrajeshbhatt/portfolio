@@ -207,9 +207,10 @@ const Editor = ({ data, setData, onClose }) => {
           <EditorField label="Role Title" value={data.personalInfo.role} onChange={(v) => updatePersonalInfo('role', v)} />
           <EditorField label="Location" value={data.personalInfo.location} onChange={(v) => updatePersonalInfo('location', v)} />
           <EditorField label="Email" value={data.personalInfo.email} onChange={(v) => updatePersonalInfo('email', v)} />
-          <EditorField label="Image URL (e.g., /profile.jpg)" value={data.personalInfo.image || ''} onChange={(v) => updatePersonalInfo('image', v)} />
+          <EditorField label="Image URL" value={data.personalInfo.image || ''} onChange={(v) => updatePersonalInfo('image', v)} />
           <div className="md:col-span-2">
-            <EditorField label="Hero Background URL" value={data.personalInfo.heroImage || ''} onChange={(v) => updatePersonalInfo('heroImage', v)} />          </div>
+            <EditorField label="Hero Background URL" value={data.personalInfo.heroImage || ''} onChange={(v) => updatePersonalInfo('heroImage', v)} />            
+            </div>
         </div>
       </div>
       <div className="bg-slate-900/50 p-6 rounded-xl border border-slate-800">
