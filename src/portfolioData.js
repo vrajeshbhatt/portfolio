@@ -8,8 +8,8 @@ import {
 export const portfolioData = {
   personalInfo: {
     name: "Vrajesh Bhatt",
-    role: "Data Analyst & Machine Learning Engineer",
-    tagline: "Transforming raw data into actionable intelligence through AI and scalable software solutions.",
+    role: "AI Engineer",
+    tagline: "Architecting and deploying production-grade LLM applications, agentic workflows, and real-time voice automation systems.",
     location: "Toronto, ON, Canada",
     email: "vrajesh.bhatt@outlook.com",
     availability: "Open to Relocate",
@@ -25,91 +25,92 @@ export const portfolioData = {
   
   about: {
     title: "About Me",
-    description: "I am a skilled Machine Learning Software Engineer and Data Analyst with over 3 years of experience in building scalable software products and ML systems. My expertise bridges the gap between complex data algorithms and user-friendly applications. I specialize in Python, SQL, and cloud technologies, focusing on robust ML pipelines, NLP, and predictive analytics. Whether it's optimizing backend architectures or deriving business insights through interactive dashboards, I am passionate about leveraging cutting-edge technologies to solve real-world problems."
+    description: "I am an AI Engineer with 2+ years of experience architecting and deploying production-grade LLM applications, agentic workflows, and real-time voice automation systems. I specialize in stateful multi-agent pipelines, RAG systems, and constrained tool-calling architectures that bridge unstructured conversational data with rigid enterprise POS and CRM business logic. With a strong track record as a technical liaison between product teams and enterprise clients, I translate complex business requirements into high-reliability AI solutions. I thrive in fast-paced, client-facing environments that demand a bias for action, iterative delivery, and measurable outcomes."
   },
 
   skills: [
     {
-      category: "Machine Learning & AI",
+      category: "AI & Agentic Systems",
       icon: "Brain",
-      items: ["NLP", "TensorFlow", "Keras", "Scikit-learn", "Computer Vision", "Predictive Analytics", "Transformers", "Vertex AI"]
+      items: ["LangGraph", "CrewAI", "Agentic Workflows", "Prompt Engineering", "RAG Systems", "Tool-Calling Architectures", "JSON Schema / Zod", "Vector Databases", "BERT", "TensorFlow", "Keras"]
     },
     {
-      category: "Data Analysis & Visualization",
+      category: "Voice AI & Conversational",
       icon: "Layout",
-      items: ["Power BI", "Tableau", "Pandas", "NumPy", "SQL", "ETL Pipelines", "Excel", "Matplotlib"]
+      items: ["Retell AI", "Vapi", "Real-Time State Management", "Multi-Turn Dialogue Design", "Live Voice Infrastructure", "Voice-to-POS Integration", "Structured Output Schemas", "Webhook Integration"]
     },
     {
-      category: "Backend & Development",
+      category: "Engineering & Cloud",
       icon: "Server",
-      items: ["Python", "Flask", "Django", "RESTful APIs", "Microservices", "C/C++", "JavaScript"]
+      items: ["Python", "TypeScript", "Node.js", "Express.js", "Next.js 16", "Flask", "RESTful APIs", "Docker", "Vercel", "Render", "AWS (EC2, S3)", "GCP", "n8n Orchestration"]
     },
     {
-      category: "Tools & Cloud",
+      category: "Data & Infrastructure",
       icon: "Terminal",
-      items: ["GCP", "Azure", "Docker", "Kubernetes", "Git/GitHub", "Jira", "Jupyter"]
+      items: ["PostgreSQL", "Advanced SQL", "Pandas", "NumPy", "Scikit-learn", "Power BI", "NoSQL", "ETL Pipelines", "Relational Modeling"]
     }
   ],
 
   experience: [
     {
       id: 1,
-      role: "Assistant Department Manager",
-      company: "No Frills",
-      location: "Toronto, ON",
-      period: "Aug 2024 - Present",
+      role: "AI Automation Engineer — Forward-Deployed",
+      company: "Genie AI",
+      location: "Remote",
+      period: "Jan 2026 - Present",
       description: [
-        "Manage inventory records and optimize stock levels to ensure smooth department operations.",
-        "Address inquiries, resolve issues, and collaborate with team members to maintain efficiency.",
-        "Demonstrate strong operational management and leadership in a fast-paced retail environment."
+        "Serve as the primary technical liaison between product teams and enterprise client-side SMEs, scoping objectives and deploying custom AI-driven feature enhancements.",
+        "Design and deploy proprietary automation software using Python, Selenium, and modular data architectures, translating complex workflows into scalable code.",
+        "Integrate LLMs and generative AI capabilities into live automation pipelines, engineering robust error-handling and decision logic.",
+        "Drive fast prototyping cycles to build and validate proof-of-concept iterations, accelerating time-to-production."
       ]
     },
     {
       id: 2,
-      role: "Financial Data Analyst",
-      company: "Moah Appliances and Services",
-      location: "Toronto, ON",
-      period: "Apr 2023 - June 2024",
+      role: "AI Developer - Systems & Agentic Engineering",
+      company: "SmartReview",
+      location: "Remote",
+      period: "Dec 2025 - Present",
       description: [
-        "Created automated reporting solutions using Excel and Python, reducing manual work by 65%.",
-        "Gathered business requirements from finance partners and validated data mappings.",
-        "Documented business rules for financial reporting systems to ensure data accuracy."
+        "Architect and ship production-ready AI agents handling complex customer queries, reservations, and order management by bridging natural language with POS/CRM systems.",
+        "Design constrained tool-calling architectures using JSON schemas and enums, eliminating LLM hallucinations and ensuring 100% data integrity.",
+        "Engineer direct pipeline connections to enterprise interfaces, translating unstructured conversational streams into deterministic payloads."
       ]
     },
     {
       id: 3,
-      role: "Data Analyst (Co-op)",
-      company: "Toronto Business College",
+      role: "Financial Data Analyst & Systems Engineer",
+      company: "Moah Appliance and Services Inc.",
       location: "Toronto, ON",
-      period: "Sept 2023 - Dec 2023",
+      period: "Apr 2023 - Jun 2024",
       description: [
-        "Designed and deployed 15+ interactive Power BI dashboards utilizing star schema models.",
-        "Developed advanced DAX expressions for complex calculations and data transformations.",
-        "Presented analytical findings to managerial audiences, enhancing data literacy across teams."
+        "Built relational analytical environments processing 100K+ transaction records using SQL and Python pipelines to automate audit trails and surface operational inefficiencies.",
+        "Reduced manual data transformation workloads by 65% through Python (Pandas/NumPy) tooling and structured ETL optimization; recognized as Employee of the Quarter.",
+        "Designed, deployed, and maintained interactive Power BI dashboards that converted high-volume operational records into structured performance metrics.",
+        "Authored comprehensive technical documentation establishing clear data pipeline logic and audit trails for both technical and non-technical stakeholders."
       ]
     },
     {
       id: 4,
-      role: "Python Backend Engineer",
-      company: "Getactvy Physio",
-      location: "Bengaluru, India",
-      period: "May 2021 - Mar 2023",
+      role: "Data Analyst (Co-op)",
+      company: "Toronto Business College",
+      location: "Toronto, ON",
+      period: "Sep 2023 - Dec 2023",
       description: [
-        "Implemented RESTful services using Python and Flask to seamlessly integrate ML models.",
-        "Collaborated with Data Scientists to build, deploy, and refine models for scalability.",
-        "Conducted detailed code reviews and optimized system performance for user engagement."
+        "Engineered and launched 15+ SQL and Power BI dashboards to monitor student acquisition metrics; automated cross-platform ETL workflows in Python, cutting manual report turnaround by 50%.",
+        "Partnered with business units to define technical requirements and translate systemic data constraints into actionable dashboard logic.",
+        "Presented analytical findings to managerial audiences, enhancing data literacy across teams."
       ]
     },
     {
       id: 5,
-      role: "Machine Learning Intern",
-      company: "Gatisofttech",
-      location: "Surat, India",
-      period: "Dec 2020 - Apr 2021",
+      role: "Python Backend Engineer",
+      company: "Getactyv Physio",
+      location: "Bengaluru, India",
+      period: "May 2021 - Mar 2022",
       description: [
-        "Developed an Automated Ticket Management System using neural network models (25% time reduction).",
-        "Implemented end-to-end cloud deployment ensuring adherence to statistics-driven insights.",
-        "Applied advanced analytics to understand customer behaviors and drive profitability."
+        "Engineered scalable RESTful APIs using Python and Flask to operationalize ML models in real-time production environments, with SQL query optimization under peak concurrent load.",
+        "Optimized SQL query performance and backend processing pipelines, significantly reducing latency under peak concurrent transaction loads."
       ]
     }
   ],
@@ -117,35 +118,35 @@ export const portfolioData = {
   projects: [
     {
       id: 1,
-      title: "Fraud Email Detection",
-      category: "NLP & Security",
-      description: "A supervised machine learning system utilizing Python, Scikit-learn, and TF-IDF to detect fraudulent emails. Enhanced with a fine-tuned BERT Large Language Model to analyze context and flag phishing attempts with high accuracy.",
-      techStack: ["Python", "BERT", "NLP", "Scikit-learn"],
+      title: "Voice AI Agent",
+      category: "Voice AI & Conversational",
+      description: "Architected an asynchronous middleware proxy normalizing erratic voice-conversational payloads into validated schemas aligned with third-party POS API endpoints (Square, Toast, Clover). Optimized hot-path latency via an Anti-Corruption Layer (ACL) and deterministic webhook router; implemented multi-tenant RLS policies and OAuth token-refresh workers ensuring 100% uptime.",
+      techStack: ["TypeScript", "Next.js 16", "Supabase", "Retell AI", "Zod", "Webhooks", "Vercel", "Render"],
       links: {
-        demo: "#", 
-        repo: "[https://github.com/vrajeshbhatt](https://github.com/vrajeshbhatt)"
+        demo: "#",
+        repo: "https://github.com/vrajeshbhatt"
       }
     },
     {
       id: 2,
-      title: "Job Title Prediction",
-      category: "Machine Learning",
-      description: "A recommendation system achieving 85% accuracy in predicting optimal job titles based on user profiles. Implemented ranking models and ETL processes to extract insights from extensive databases.",
-      techStack: ["ML", "ETL", "Python", "Data Pipelines"],
+      title: "Automated Ticket Triage & CI/CD Deployment Pipeline",
+      category: "AI & Cloud",
+      description: "Built and trained an NLP text classification model using TensorFlow and Keras to predict incoming support ticket categories and priorities, optimizing operational triage workflows. Designed Python and Pandas ETL pipelines to clean unstructured text data, extract feature weights, and vectorize text using embedding techniques. Containerized production inference models with Docker and built a fully automated CI/CD deployment pipeline via GitHub Actions to AWS EC2.",
+      techStack: ["Python", "TensorFlow", "Docker", "GitHub Actions", "Flask", "AWS EC2", "Pandas", "ETL"],
       links: {
         demo: "#",
-        repo: "[https://github.com/vrajeshbhatt](https://github.com/vrajeshbhatt)"
+        repo: "https://github.com/vrajeshbhatt"
       }
     },
     {
       id: 3,
-      title: "Automated Ticket System",
-      category: "AI & Cloud",
-      description: "An intelligent ticket management solution using neural networks to predict ticket categories and priorities. Deployed on cloud platforms using Flask for the backend API and Hugging Face for model accessibility.",
-      techStack: ["Neural Networks", "Flask", "Cloud", "Hugging Face"],
+      title: "LangGraph Multi-Agent Orchestration System",
+      category: "AI Agents (In Dev)",
+      description: "Building stateful multi-agent pipelines using LangGraph and CrewAI to coordinate specialized AI sub-agents with persistent memory, dynamic task routing, and conditional branching logic. Integrating RAG-based retrieval and tool-use capabilities to enable agents to autonomously resolve complex, multi-step enterprise queries using live vector knowledge bases.",
+      techStack: ["LangGraph", "CrewAI", "RAG", "OpenAI API", "Supabase Vector"],
       links: {
         demo: "#",
-        repo: "[https://github.com/vrajeshbhatt](https://github.com/vrajeshbhatt)"
+        repo: "https://github.com/vrajeshbhatt"
       }
     },
     {
@@ -156,7 +157,7 @@ export const portfolioData = {
       techStack: ["Power BI", "SQL", "DAX", "Data Viz"],
       links: {
         demo: "#",
-        repo: "[https://github.com/vrajeshbhatt](https://github.com/vrajeshbhatt)"
+        repo: "https://github.com/vrajeshbhatt"
       }
     }
   ]
